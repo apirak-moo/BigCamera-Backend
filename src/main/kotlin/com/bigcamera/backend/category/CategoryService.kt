@@ -2,6 +2,7 @@ package com.bigcamera.backend.category
 
 import org.springframework.data.crossstore.ChangeSetPersister
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 @Service
 class CategoryService(private val categoryRepo: CategoryRepo) : ICategoryService {
@@ -16,16 +17,19 @@ class CategoryService(private val categoryRepo: CategoryRepo) : ICategoryService
         }
     }
 
+    @Transactional
     override fun create(request: CategoryRequest): Category {
-        return categoryRepo.save(create(request))
+        return categoryRepo.save(Category(name = request.name))
     }
 
+    @Transactional
     override fun updateById(id: Int, request: CategoryRequest) {
         val category = findById(id)
         category.name = request.name
         categoryRepo.save(category)
     }
 
+    @Transactional
     override fun deleteById(id: Int) {
         val category = findById(id)
         categoryRepo.delete(category)
