@@ -1,5 +1,8 @@
-//package com.bigcamera.backend.category
-//
-//data class CategoryRequest(
-//    val name: String,
-//)
+package com.bigcamera.backend.category
+
+import jakarta.validation.constraints.NotBlank
+
+data class CategoryRequest(
+    @NotBlank(message = "Category cannot be blank")
+    val name: String,
+)
