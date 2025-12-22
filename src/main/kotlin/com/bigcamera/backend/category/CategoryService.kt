@@ -1,5 +1,6 @@
 package com.bigcamera.backend.category
 
+import com.bigcamera.backend.exceptions.NotFoundException
 import org.springframework.data.crossstore.ChangeSetPersister
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -13,7 +14,7 @@ class CategoryService(private val categoryRepo: CategoryRepo) : ICategoryService
 
     override fun findById(id: Int): Category {
         return categoryRepo.findById(id).orElseThrow {
-            ChangeSetPersister.NotFoundException()
+            NotFoundException("Category Not Found")
         }
     }
 
