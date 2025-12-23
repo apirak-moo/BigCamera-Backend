@@ -30,15 +30,6 @@ extra["springModulithVersion"] = "2.0.0"
 
 dependencies {
 
-    // https://mvnrepository.com/artifact/com.blazebit/blaze-persistence-core-api-jakarta
-    implementation("com.blazebit:blaze-persistence-core-api-jakarta:1.6.17")
-
-    // https://mvnrepository.com/artifact/com.blazebit/blaze-persistence-core-impl-jakarta
-    runtimeOnly("com.blazebit:blaze-persistence-core-impl-jakarta:1.6.17")
-
-    // https://mvnrepository.com/artifact/com.blazebit/blaze-persistence-integration-hibernate-6.2
-    runtimeOnly("com.blazebit:blaze-persistence-integration-hibernate-6.2:1.6.17")
-
     // https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:3.0.0")
 
