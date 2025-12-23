@@ -1,6 +1,7 @@
 package com.bigcamera.backend.product
 
 import java.math.BigDecimal
+import java.time.Instant
 import java.util.UUID
 
 data class ProductResponse(
@@ -8,5 +9,7 @@ data class ProductResponse(
     val name: String,
     val description: String? = null,
     val price: BigDecimal = BigDecimal.ZERO,
-    val details: MutableList<ProductResponse> = mutableListOf()
+    val details: MutableList<ProductResponse> = mutableListOf(),
+    val createAt: Instant? = null,
+    val updateAt: Instant? = null,
 )
