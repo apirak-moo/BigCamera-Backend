@@ -30,6 +30,12 @@ extra["springModulithVersion"] = "2.0.0"
 
 dependencies {
 
+    // https://mvnrepository.com/artifact/com.querydsl/querydsl-jpa
+    implementation("com.querydsl:querydsl-jpa:5.1.0")
+
+    // https://mvnrepository.com/artifact/com.querydsl/querydsl-apt
+    implementation("com.querydsl:querydsl-apt:5.1.0")
+
     // https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:3.0.0")
 
