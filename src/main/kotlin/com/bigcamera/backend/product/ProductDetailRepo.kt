@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository
 import java.util.UUID
 
 @Repository
-interface ProductDetailRepo : JpaRepository<ProductDetail, UUID>, QuerydslPredicateExecutor<ProductDetail> {
+interface ProductDetailRepo : JpaRepository<ProductDetail, UUID> {
 
 }

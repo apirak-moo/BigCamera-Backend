@@ -5,6 +5,6 @@ import org.springframework.data.querydsl.QuerydslPredicateExecutor
 import org.springframework.stereotype.Repository
 
 @Repository
-interface CategoryRepo : JpaRepository<Category, Int>, QuerydslPredicateExecutor<Category> {
+interface CategoryRepo : JpaRepository<Category, Int> {
 
 }

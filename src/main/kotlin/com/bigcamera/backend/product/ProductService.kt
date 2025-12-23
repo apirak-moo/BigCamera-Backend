@@ -7,8 +7,9 @@ import java.util.UUID
 @Service
 class ProductService(
     private val categoryRepo: CategoryRepo,
-    private val productRepo: ProductRepo
+    private val productRepo: ProductRepo,
 ) : IProductService {
+
 
     override fun getAllProducts(): List<ProductResponse> {
         TODO("Not yet implemented")
