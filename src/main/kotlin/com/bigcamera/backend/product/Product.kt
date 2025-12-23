@@ -35,7 +35,7 @@ class Product (
     @OneToMany(mappedBy = "product", orphanRemoval = true, cascade = [(CascadeType.ALL)], fetch = FetchType.LAZY)
     var details: MutableList<ProductDetail> = mutableListOf()
 
-) {
+) : AuditableEntity() {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
