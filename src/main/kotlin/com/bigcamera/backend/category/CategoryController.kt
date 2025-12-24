@@ -1,6 +1,7 @@
 package com.bigcamera.backend.category
 
-import com.bigcamera.backend.mappers.toResponse
+import com.bigcamera.backend.mappers.toCategoryResponse
+import com.bigcamera.backend.mappers.toListCategoryResponse
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -23,19 +24,19 @@ class CategoryController(private val categoryService: CategoryService) {
     fun findAll(
         @ModelAttribute search: CategorySearch? = null,
     ): ResponseEntity<List<CategoryResponse>> {
-        val categories = categoryService.findAll(search).toResponse()
+        val categories = categoryService.findAll(search).toListCategoryResponse()
         return ResponseEntity.ok(categories)
     }
 
     @GetMapping(value = ["/{id}"])
     fun findById(@PathVariable id: Int): ResponseEntity<CategoryResponse> {
-        val category = categoryService.findById(id).toResponse()
+        val category = categoryService.findById(id).toCategoryResponse()
         return ResponseEntity.ok().body(category)
     }
 
     @PostMapping
     fun create(@Valid @RequestBody request: CategoryRequest): ResponseEntity<CategoryResponse> {
-        val created = categoryService.create(request).toResponse()
+        val created = categoryService.create(request).toCategoryResponse()
         val location = URI("/categories/${created.id}")
         return ResponseEntity.created(location).body(created)
     }

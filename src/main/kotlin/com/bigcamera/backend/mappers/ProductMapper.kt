@@ -5,7 +5,7 @@ import com.bigcamera.backend.product.ProductDetail
 import com.bigcamera.backend.product.ProductDetailResponse
 import com.bigcamera.backend.product.ProductResponse
 
-fun Product.toResponse(): ProductResponse {
+fun Product.toProductResponse(): ProductResponse {
     return ProductResponse(
         id = this.id!!,
         name = this.name,
@@ -14,11 +14,11 @@ fun Product.toResponse(): ProductResponse {
     )
 }
 
-fun List<Product>.toResponse(): List<ProductResponse> {
-    return map { it.toResponse() }
+fun List<Product>.toListProductResponse(): List<ProductResponse> {
+    return map { it.toProductResponse() }
 }
 
-fun ProductDetail.toResponse(): ProductDetailResponse {
+fun ProductDetail.toProductDetailResponse(): ProductDetailResponse {
     return ProductDetailResponse(
         id = this.id!!,
         name = this.name,
@@ -26,6 +26,6 @@ fun ProductDetail.toResponse(): ProductDetailResponse {
     )
 }
 
-fun List<ProductDetail>.toResponse(): List<ProductDetailResponse> {
-    return map { it.toResponse() }
+fun List<ProductDetail>.toListProductDetailResponse(): List<ProductDetailResponse> {
+    return map { it.toProductDetailResponse() }
 }

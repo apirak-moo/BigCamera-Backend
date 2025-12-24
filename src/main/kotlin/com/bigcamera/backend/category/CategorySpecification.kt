@@ -4,11 +4,9 @@ import org.springframework.data.jpa.domain.Specification
 
 object CategorySpecification {
 
-    fun nameContains(name: String?) : Specification<Category>? {
-        if(name.isNullOrEmpty())
-            return null
+    fun nameContains(name: String?) : Specification<Category> {
         return Specification { root, _, cb ->
-            cb.like(cb.lower(root.get("name")), "%${name.lowercase()}%")
+            cb.like(cb.lower(root.get("name")), "%${name?.lowercase()}%")
         }
     }
 
