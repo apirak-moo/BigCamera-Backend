@@ -1,15 +1,19 @@
 package com.bigcamera.backend.category
 
 import com.bigcamera.backend.exceptions.NotFoundException
-import org.springframework.data.crossstore.ChangeSetPersister
+import org.springframework.data.jpa.domain.Specification
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 @Service
 class CategoryService(private val categoryRepo: CategoryRepo) : ICategoryService {
 
-    override fun findAll(): List<Category> {
-        return categoryRepo.findAll()
+    override fun findAll(search: CategorySearch?): List<Category> {
+        val spec = Specification.where(
+            CategorySpecification.nameContains(search?.name)
+        )
+        val categories = categoryRepo.findAll(spec)
+        return categories
     }
 
     override fun findById(id: Int): Category {

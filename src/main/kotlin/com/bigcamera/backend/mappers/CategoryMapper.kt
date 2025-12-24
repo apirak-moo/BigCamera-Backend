@@ -3,13 +3,13 @@ package com.bigcamera.backend.mappers
 import com.bigcamera.backend.category.Category
 import com.bigcamera.backend.category.CategoryResponse
 
-fun Category.toCategoryResponse(category: Category): CategoryResponse {
+fun Category.toResponse(): CategoryResponse {
     return CategoryResponse(
-        id = category.id!!,
-        name = category.name
+        id = this.id!!,
+        name = this.name
     )
 }
 
-fun Category.toListCategoryResponse(categories: List<Category>): List<CategoryResponse> {
-    return categories.map { toCategoryResponse(it) }
+fun List<Category>.toResponse(): List<CategoryResponse> {
+    return map { it.toResponse() }
 }

@@ -1,10 +1,12 @@
 package com.bigcamera.backend.category
 
+import com.bigcamera.backend.mappers.toResponse
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.ModelAttribute
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.PutMapping
@@ -18,18 +20,22 @@ import java.net.URI
 class CategoryController(private val categoryService: CategoryService) {
 
     @GetMapping
-    fun findAll(): ResponseEntity<List<Category>> {
-        return ResponseEntity.ok().body(categoryService.findAll())
+    fun findAll(
+        @ModelAttribute search: CategorySearch? = null,
+    ): ResponseEntity<List<CategoryResponse>> {
+        val categories = categoryService.findAll(search).toResponse()
+        return ResponseEntity.ok(categories)
     }
 
     @GetMapping(value = ["/{id}"])
-    fun findById(@PathVariable id: Int): ResponseEntity<Category> {
-        return ResponseEntity.ok().body(categoryService.findById(id))
+    fun findById(@PathVariable id: Int): ResponseEntity<CategoryResponse> {
+        val category = categoryService.findById(id).toResponse()
+        return ResponseEntity.ok().body(category)
     }
 
     @PostMapping
-    fun create(@Valid @RequestBody request: CategoryRequest): ResponseEntity<Category> {
-        val created = categoryService.create(request)
+    fun create(@Valid @RequestBody request: CategoryRequest): ResponseEntity<CategoryResponse> {
+        val created = categoryService.create(request).toResponse()
         val location = URI("/categories/${created.id}")
         return ResponseEntity.created(location).body(created)
     }

@@ -5,27 +5,27 @@ import com.bigcamera.backend.product.ProductDetail
 import com.bigcamera.backend.product.ProductDetailResponse
 import com.bigcamera.backend.product.ProductResponse
 
-fun Product.toProductResponse(product: Product): ProductResponse {
+fun Product.toResponse(): ProductResponse {
     return ProductResponse(
-        id = product.id!!,
-        name = product.name,
-        description = product.description,
-        price = product.price,
+        id = this.id!!,
+        name = this.name,
+        description = this.description,
+        price = this.price,
     )
 }
 
-fun Product.toList(productDetails: List<ProductDetail>): List<ProductDetailResponse> {
-    return productDetails.map { toProductDetailResponse(it) }
+fun List<Product>.toResponse(): List<ProductResponse> {
+    return map { it.toResponse() }
 }
 
-fun Product.toProductDetailResponse(detail: ProductDetail): ProductDetailResponse {
+fun ProductDetail.toResponse(): ProductDetailResponse {
     return ProductDetailResponse(
-        id = detail.id!!,
-        name = detail.name,
-        value = detail.value,
+        id = this.id!!,
+        name = this.name,
+        value = this.value,
     )
 }
 
-fun Product.toListProductDetailResponse(details: List<ProductDetail>): List<ProductDetailResponse> {
-    return details.map { toProductDetailResponse(it) }
+fun List<ProductDetail>.toResponse(): List<ProductDetailResponse> {
+    return map { it.toResponse() }
 }
