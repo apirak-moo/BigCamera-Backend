@@ -1,33 +1,69 @@
 package com.bigcamera.backend.product
 
-import com.bigcamera.backend.category.CategoryRepo
+import com.bigcamera.backend.category.CategoryService
+import com.bigcamera.backend.exceptions.NotFoundException
 import org.springframework.stereotype.Service
 import java.util.UUID
 
 @Service
 class ProductService(
-    private val categoryRepo: CategoryRepo,
+    private val categoryService: CategoryService,
     private val productRepo: ProductRepo,
 ) : IProductService {
 
     override fun getAllProducts(): List<Product> {
-        TODO("Not yet implemented")
+        return productRepo.findAll()
     }
 
     override fun findProductById(id: UUID): Product {
-        TODO("Not yet implemented")
+        return productRepo.findById(id).orElseThrow {
+            NotFoundException("Product not found.")
+        }
     }
 
     override fun createProduct(request: ProductRequest): Product {
-        TODO("Not yet implemented")
+        val category = categoryService.findById(request.categoryId)
+        val product = Product(
+            name = request.name,
+            description = request.description,
+            price = request.price,
+            category = category,
+        )
+        request.details?.forEach {
+            product.details.add(
+                ProductDetail(
+                    name = it.name,
+                    value = it.value,
+                    product = product
+                )
+            )
+        }
+        return productRepo.save(product)
     }
 
     override fun updateProduct(id: UUID, request: ProductRequest) {
-        TODO("Not yet implemented")
+        val product = findProductById(id)
+        product.name = request.name
+        product.description = request.description
+        product.price = request.price
+        val category = categoryService.findById(request.categoryId)
+        product.category = category
+        product.details.clear()
+        request.details?.forEach {
+            product.details.add(
+                ProductDetail(
+                    name = it.name,
+                    value = it.value,
+                    product = product
+                )
+            )
+        }
+        productRepo.save(product)
     }
 
     override fun deleteProduct(id: UUID) {
-        TODO("Not yet implemented")
+        val product = findProductById(id)
+        productRepo.delete(product)
     }
 
 }
