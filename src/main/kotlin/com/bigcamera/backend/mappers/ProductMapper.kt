@@ -11,6 +11,9 @@ fun Product.toProductResponse(): ProductResponse {
         name = this.name,
         description = this.description,
         price = this.price,
+        details = this.details.toListProductDetailResponse(),
+        createAt = this.createdAt,
+        updateAt = this.updatedAt,
     )
 }
 

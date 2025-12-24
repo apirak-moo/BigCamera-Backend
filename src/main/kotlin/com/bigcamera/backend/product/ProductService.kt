@@ -11,7 +11,7 @@ class ProductService(
     private val productRepo: ProductRepo,
 ) : IProductService {
 
-    override fun getAllProducts(): List<Product> {
+    override fun findAllProducts(): List<Product> {
         return productRepo.findAll()
     }
 

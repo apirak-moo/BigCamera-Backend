@@ -9,7 +9,7 @@ data class ProductResponse(
     val name: String,
     val description: String? = null,
     val price: BigDecimal = BigDecimal.ZERO,
-    val details: MutableList<ProductResponse> = mutableListOf(),
+    val details: List<ProductDetailResponse> = listOf(),
     val createAt: Instant? = null,
     val updateAt: Instant? = null,
 )
