@@ -2,6 +2,8 @@ package com.bigcamera.backend.product
 
 import com.bigcamera.backend.category.CategoryService
 import com.bigcamera.backend.exceptions.NotFoundException
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.util.UUID
@@ -13,8 +15,11 @@ class ProductService(
 ) : IProductService {
 
     @Transactional(readOnly = true)
-    override fun findAllProducts(): List<Product> {
-        return productRepo.findAll()
+    override fun findAllProducts(search: ProductSearch, pageable: Pageable): Page<Product> {
+        val spec = ProductSpecification.categoryId(search.category)
+            .and( ProductSpecification.priceBetween(search.min, search.max) )
+            .and(ProductSpecification.nameConstraints(search.name))
+        return productRepo.findAll(spec, pageable)
     }
 
     @Transactional(readOnly = true)
