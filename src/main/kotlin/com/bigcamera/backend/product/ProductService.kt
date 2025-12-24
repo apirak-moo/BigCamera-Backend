@@ -12,10 +12,12 @@ class ProductService(
     private val productRepo: ProductRepo,
 ) : IProductService {
 
+    @Transactional(readOnly = true)
     override fun findAllProducts(): List<Product> {
         return productRepo.findAll()
     }
 
+    @Transactional(readOnly = true)
     override fun findProductById(id: UUID): Product {
         return productRepo.findById(id).orElseThrow {
             NotFoundException("Product not found.")
