@@ -3,6 +3,7 @@ package com.bigcamera.backend.product
 import com.bigcamera.backend.category.CategoryService
 import com.bigcamera.backend.exceptions.NotFoundException
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import java.util.UUID
 
 @Service
@@ -21,6 +22,7 @@ class ProductService(
         }
     }
 
+    @Transactional
     override fun createProduct(request: ProductRequest): Product {
         val category = categoryService.findById(request.categoryId)
         val product = Product(
@@ -41,6 +43,7 @@ class ProductService(
         return productRepo.save(product)
     }
 
+    @Transactional
     override fun updateProduct(id: UUID, request: ProductRequest) {
         val product = findProductById(id)
         product.name = request.name
@@ -61,6 +64,7 @@ class ProductService(
         productRepo.save(product)
     }
 
+    @Transactional
     override fun deleteProduct(id: UUID) {
         val product = findProductById(id)
         productRepo.delete(product)
