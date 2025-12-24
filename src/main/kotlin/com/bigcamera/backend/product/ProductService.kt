@@ -10,15 +10,15 @@ class ProductService(
     private val productRepo: ProductRepo,
 ) : IProductService {
 
-    override fun getAllProducts(): List<ProductResponse> {
+    override fun getAllProducts(): List<Product> {
         TODO("Not yet implemented")
     }
 
-    override fun findProductById(id: UUID): ProductResponse {
+    override fun findProductById(id: UUID): Product {
         TODO("Not yet implemented")
     }
 
-    override fun createProduct(request: ProductRequest): ProductResponse {
+    override fun createProduct(request: ProductRequest): Product {
         TODO("Not yet implemented")
     }
 
